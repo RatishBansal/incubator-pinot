@@ -25,13 +25,13 @@ import com.yammer.metrics.core.Metered;
 import com.yammer.metrics.core.MetricName;
 import com.yammer.metrics.core.MetricProcessor;
 import com.yammer.metrics.core.Timer;
-import org.apache.pinot.common.metrics.base.PinotCounter;
-import org.apache.pinot.common.metrics.base.PinotGauge;
-import org.apache.pinot.common.metrics.base.PinotHistogram;
-import org.apache.pinot.common.metrics.base.PinotMetered;
-import org.apache.pinot.common.metrics.base.PinotMetricName;
-import org.apache.pinot.common.metrics.base.PinotMetricProcessor;
-import org.apache.pinot.common.metrics.base.PinotTimer;
+import org.apache.pinot.spi.metrics.PinotCounter;
+import org.apache.pinot.spi.metrics.PinotGauge;
+import org.apache.pinot.spi.metrics.PinotHistogram;
+import org.apache.pinot.spi.metrics.PinotMetered;
+import org.apache.pinot.spi.metrics.PinotMetricName;
+import org.apache.pinot.spi.metrics.PinotMetricProcessor;
+import org.apache.pinot.spi.metrics.PinotTimer;
 
 
 public class YammerMetricProcessor<T> implements PinotMetricProcessor<T> {

@@ -16,36 +16,17 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.common.metrics.base;
-
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+package org.apache.pinot.spi.metrics;
 
 
-public interface PinotMetricsRegistry {
+public interface PinotGauge<T> extends PinotMetric {
 
-  void removeMetric(PinotMetricName name);
-
-  <T>PinotGauge<T> newGauge(PinotMetricName name, PinotGauge<T> gauge);
-
-  PinotMeter newMeter(PinotMetricName name, String eventType, TimeUnit unit);
-
-  PinotCounter newCounter(PinotMetricName name);
-
-  PinotTimer newTimer(PinotMetricName name, TimeUnit durationUnit, TimeUnit rateUnit);
-
-  PinotHistogram newHistogram(PinotMetricName name, boolean biased);
+  Object getGauge();
 
   /**
-   * Returns an unmodifiable map of all metrics and their names.
+   * Returns the metric's current value.
    *
-   * @return an unmodifiable map of all metrics and their names
+   * @return the metric's current value
    */
-  Map<PinotMetricName, PinotMetric> allMetrics();
-
-  Object getMetricsRegistry();
-
-//  newAggregatedMeter(PinotMetricName name);
-
-  void shutdown();
+  public abstract T value();
 }

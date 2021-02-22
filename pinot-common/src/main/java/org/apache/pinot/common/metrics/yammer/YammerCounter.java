@@ -19,13 +19,14 @@
 package org.apache.pinot.common.metrics.yammer;
 
 import com.yammer.metrics.core.Counter;
-import org.apache.pinot.common.metrics.base.PinotCounter;
-import org.apache.pinot.common.metrics.base.PinotMetricName;
-import org.apache.pinot.common.metrics.base.PinotMetricProcessor;
+import com.yammer.metrics.core.Metric;
+import org.apache.pinot.spi.metrics.PinotCounter;
+import org.apache.pinot.spi.metrics.PinotMetricName;
+import org.apache.pinot.spi.metrics.PinotMetricProcessor;
 
 
 public class YammerCounter extends YammerMetric implements PinotCounter {
-  private Counter _counter;
+  private final Counter _counter;
 
   public YammerCounter(Counter counter) {
     super(counter);
@@ -34,6 +35,11 @@ public class YammerCounter extends YammerMetric implements PinotCounter {
 
   @Override
   public Object getCounter() {
+    return _counter;
+  }
+
+  @Override
+  public Metric getMetric() {
     return _counter;
   }
 

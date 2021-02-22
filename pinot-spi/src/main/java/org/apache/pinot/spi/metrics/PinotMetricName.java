@@ -16,19 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.common.metrics.base;
+package org.apache.pinot.spi.metrics;
 
 
-public interface PinotMetric {
+public interface PinotMetricName {
 
-  /**
-   * Allow the given {@link PinotMetricProcessor} to process {@code this} as a metric.
-   *
-   * @param processor    a {@link PinotMetricProcessor}
-   * @param name         the name of the current metric
-   * @param context      a given context which should be passed on to {@code processor}
-   * @param <T>          the type of the context object
-   * @throws Exception if something goes wrong
-   */
-  <T> void processWith(PinotMetricProcessor<T> processor, PinotMetricName name, T context) throws Exception;
+  Object getMetricName();
 }

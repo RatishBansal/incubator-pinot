@@ -16,10 +16,29 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.common.metrics.base;
+package org.apache.pinot.spi.metrics;
 
+/**
+ * Listeners for events from the registry.  Listeners must be thread-safe.
+ */
+public interface PinotMetricsRegistryListener {
+  /**
+   * Called when a metric has been added to the {@link PinotMetricsRegistry}.
+   *
+   * @param name   the name of the {@link PinotMetric}
+   * @param metric the {@link PinotMetric}
+   */
+  void onMetricAdded(PinotMetricName name, PinotMetric metric);
 
-public interface PinotMetricName {
+  /**
+   * Called when a metric has been removed from the {@link PinotMetricsRegistry}.
+   *
+   * @param name the name of the {@link PinotMetric}
+   */
+  void onMetricRemoved(PinotMetricName name);
 
-  Object getMetricName();
+  /**
+   * Returned the actual object of MetricsRegistryListener.
+   */
+  Object getMetricsRegistryListener();
 }

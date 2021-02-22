@@ -16,14 +16,36 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.common.metrics.base;
+package org.apache.pinot.spi.metrics;
 
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
-public interface PinotTimer extends PinotMetered {
+public interface PinotMetricsRegistry {
 
-  void update(long duration, TimeUnit unit);
+  void removeMetric(PinotMetricName name);
 
-  Object getTimer();
+  <T>PinotGauge<T> newGauge(PinotMetricName name, PinotGauge<T> gauge);
+
+  PinotMeter newMeter(PinotMetricName name, String eventType, TimeUnit unit);
+
+  PinotCounter newCounter(PinotMetricName name);
+
+  PinotTimer newTimer(PinotMetricName name, TimeUnit durationUnit, TimeUnit rateUnit);
+
+  PinotHistogram newHistogram(PinotMetricName name, boolean biased);
+
+  /**
+   * Returns an unmodifiable map of all metrics and their names.
+   *
+   * @return an unmodifiable map of all metrics and their names
+   */
+  Map<PinotMetricName, PinotMetric> allMetrics();
+
+  Object getMetricsRegistry();
+
+  void addListener(PinotMetricsRegistryListener listener);
+
+  void shutdown();
 }

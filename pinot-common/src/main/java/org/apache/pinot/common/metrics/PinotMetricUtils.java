@@ -16,10 +16,14 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.apache.pinot.common.metrics.base;
+package org.apache.pinot.common.metrics;
 
 import java.util.function.Function;
 import org.apache.pinot.common.exception.InvalidConfigException;
+import org.apache.pinot.spi.metrics.PinotGauge;
+import org.apache.pinot.spi.metrics.PinotJmxReporter;
+import org.apache.pinot.spi.metrics.PinotMetricName;
+import org.apache.pinot.spi.metrics.PinotMetricsRegistry;
 import org.apache.pinot.common.metrics.yammer.YammerGauge;
 import org.apache.pinot.common.metrics.yammer.YammerJmxReporter;
 import org.apache.pinot.common.metrics.yammer.YammerMetricName;
@@ -28,8 +32,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class PinotMetricUtilsFactory {
-  private static final Logger LOGGER = LoggerFactory.getLogger(PinotMetricUtilsFactory.class);
+public class PinotMetricUtils {
+  private static final Logger LOGGER = LoggerFactory.getLogger(PinotMetricUtils.class);
   public static final String LIBRARY_NAME_KEY = "libraryName";
   public static final String YAMMER_KEY = "yammer";
 

@@ -18,33 +18,33 @@
  */
 package org.apache.pinot.common.metrics.yammer;
 
-import com.yammer.metrics.core.Meter;
-import org.apache.pinot.spi.metrics.PinotMeter;
+import com.yammer.metrics.core.Metric;
+import com.yammer.metrics.core.MetricName;
+import com.yammer.metrics.core.MetricsRegistryListener;
+import org.apache.pinot.spi.metrics.PinotMetric;
 import org.apache.pinot.spi.metrics.PinotMetricName;
-import org.apache.pinot.spi.metrics.PinotMetricProcessor;
+import org.apache.pinot.spi.metrics.PinotMetricsRegistryListener;
 
 
-public class YammerMeter extends YammerMetered implements PinotMeter {
-  private final Meter _meter;
+public class YammerMetricsRegistryListener implements PinotMetricsRegistryListener {
+  private final MetricsRegistryListener _metricsRegistryListener;
 
-  public YammerMeter(Meter meter) {
-    super(meter);
-    _meter = meter;
+  public YammerMetricsRegistryListener(MetricsRegistryListener metricsRegistryListener) {
+    _metricsRegistryListener = metricsRegistryListener;
   }
 
   @Override
-  public void mark(long unitCount) {
-    _meter.mark(unitCount);
+  public void onMetricAdded(PinotMetricName name, PinotMetric metric) {
+    _metricsRegistryListener.onMetricAdded((MetricName) name.getMetricName(), (Metric) metric.getMetric());
   }
 
   @Override
-  public Object getMetric() {
-    return _meter;
+  public void onMetricRemoved(PinotMetricName name) {
+    _metricsRegistryListener.onMetricRemoved((MetricName) name.getMetricName());
   }
 
   @Override
-  public <T> void processWith(PinotMetricProcessor<T> processor, PinotMetricName name, T context)
-      throws Exception {
-    processor.processMeter(name, this, context);
+  public Object getMetricsRegistryListener() {
+    return _metricsRegistryListener;
   }
 }

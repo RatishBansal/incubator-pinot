@@ -20,9 +20,9 @@ package org.apache.pinot.common.metrics.yammer;
 
 import com.yammer.metrics.core.Gauge;
 import java.util.function.Function;
-import org.apache.pinot.common.metrics.base.PinotGauge;
-import org.apache.pinot.common.metrics.base.PinotMetricName;
-import org.apache.pinot.common.metrics.base.PinotMetricProcessor;
+import org.apache.pinot.spi.metrics.PinotGauge;
+import org.apache.pinot.spi.metrics.PinotMetricName;
+import org.apache.pinot.spi.metrics.PinotMetricProcessor;
 
 
 public class YammerGauge<T> implements PinotGauge<T> {
@@ -44,6 +44,11 @@ public class YammerGauge<T> implements PinotGauge<T> {
 
   @Override
   public Object getGauge() {
+    return _gauge;
+  }
+
+  @Override
+  public Object getMetric() {
     return _gauge;
   }
 

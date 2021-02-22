@@ -19,7 +19,7 @@
 package org.apache.pinot.common.metrics.yammer;
 
 import com.yammer.metrics.core.MetricName;
-import org.apache.pinot.common.metrics.base.PinotMetricName;
+import org.apache.pinot.spi.metrics.PinotMetricName;
 
 
 public class YammerMetricName implements PinotMetricName {
